@@ -8,7 +8,7 @@ from src.globals import MAX_AIR_DENSITY, MAX_WIND_SPEED, MIN_AIR_DENSITY, MIN_WI
 @dataclasses.dataclass
 class WindTurbine:
     name: str = "Wind Turbine"
-    rotor_radius: float = 40.0
+    rotor_radius: float = 10.0
 
     def calculate_swept_area(self):
         return math.pi * self.rotor_radius**2

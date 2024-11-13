@@ -2,6 +2,7 @@ import dataclasses
 import datetime
 
 from src.system.battery import Battery
+from src.system.consumption.heating import Heating
 from src.system.consumption.lights import Lights
 from src.system.consumption.refrigerator import Refrigerator
 from src.system.production.wind_turbine import WindTurbine
@@ -9,10 +10,11 @@ from src.system.production.wind_turbine import WindTurbine
 
 @dataclasses.dataclass
 class EnergySystem:
+    battery = Battery()
+    wind_turbine = WindTurbine()
     refrigerator = Refrigerator()
     lights = Lights()
-    wind_turbine = WindTurbine()
-    battery = Battery()
+    heating = Heating()
 
     def convert_str_to_time(self, time):
         if time:
@@ -23,6 +25,7 @@ class EnergySystem:
         return {
             f"{self.refrigerator.name}": self.refrigerator.get_consumption(time),
             f"{self.lights.name}": self.lights.get_consumption(time),
+            f"{self.heating.name}": self.heating.get_consumption(time),
         }
 
     def get_production(self, time):
@@ -59,9 +62,8 @@ class EnergySystem:
         time = start_time
         hours_simulated = 0
         while hours_simulated < 24:
-            self.update_energy_storage(time)
             print(f"Time: {time}")
-            print(f"Battery: {self.battery.get_storage()}")
-            print(f"Status: {self.battery.status}\n")
+            print(self.get_storage(time))
+            print(f"{self.get_status()}\n")
             time = time.replace(hour=(time.hour + 1) % 24)
             hours_simulated += 1

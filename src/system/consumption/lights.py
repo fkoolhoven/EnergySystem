@@ -6,7 +6,7 @@ import datetime
 class Lights:
     name: str = "Lights"
     consumption: int = 60
-    number_of_lights: int = 20
+    number_of_lights: int = 10
     lights_on: datetime.time = datetime.time(hour=17, minute=30)
     lights_off: datetime.time = datetime.time(hour=23, minute=45)
 
