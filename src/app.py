@@ -20,19 +20,19 @@ def get_time(request):
 @app.get(f"/{API_ROOT}/consumption")
 def consumption():
     time = get_time(request)
-    return system.get_total_consumption(time)
+    return system.get_consumption(time)
 
 
 @app.get(f"/{API_ROOT}/production")
 def production():
     time = get_time(request)
-    return system.get_total_production(time)
+    return system.get_production(time)
 
 
 @app.get(f"/{API_ROOT}/storage")
 def storage():
     time = get_time(request)
-    return system.get_total_storage(time)
+    return system.get_storage(time)
 
 
 if __name__ == "__main__":

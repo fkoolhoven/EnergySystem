@@ -29,5 +29,5 @@ class Battery:
             if self.charge_level < BATTERY_ALERT_THRESHOLD:
                 self.alert = "Battery is running low"
 
-    def get_storage(self, time):
+    def get_storage(self):
         return self.charge_level
