@@ -18,3 +18,9 @@ def test_storage_endpoint():
     client = app.test_client()
     response = client.get(f"/{API_ROOT}/storage")
     assert response.status_code == 200
+
+
+def test_status_endpoint():
+    client = app.test_client()
+    response = client.get(f"/{API_ROOT}/status")
+    assert response.status_code == 200
