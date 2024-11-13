@@ -22,5 +22,11 @@ def consumption():
     return system.get_total_consumption(time)
 
 
+@app.get(f"/{API_ROOT}/production")
+def production():
+    time = get_time(request)
+    return system.get_total_production(time)
+
+
 if __name__ == "__main__":
     app.run()

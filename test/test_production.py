@@ -17,11 +17,12 @@ from src.system.production.wind_turbine import WindTurbine
 @pytest.fixture
 def expected_wind_turbine_production():
     wind_turbine = WindTurbine()
+    swept_area = wind_turbine.calculate_swept_area()
     min_production = WindTurbine.calculate_production(
-        MIN_AIR_DENSITY, wind_turbine.rotor_radius, MIN_WIND_SPEED
+        MIN_AIR_DENSITY, swept_area, MIN_WIND_SPEED
     )
     max_production = WindTurbine.calculate_production(
-        MAX_AIR_DENSITY, wind_turbine.rotor_radius, MAX_WIND_SPEED
+        MAX_AIR_DENSITY, swept_area, MAX_WIND_SPEED
     )
     return min_production, max_production
 
