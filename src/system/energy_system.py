@@ -1,4 +1,5 @@
 import dataclasses
+import datetime
 
 from src.system.battery import Battery
 from src.system.consumption.lights import Lights
@@ -12,6 +13,11 @@ class EnergySystem:
     lights = Lights()
     wind_turbine = WindTurbine()
     battery = Battery()
+
+    def convert_str_to_time(self, time):
+        if time:
+            return datetime.datetime.strptime(time, "%H:%M").time()
+        return datetime.datetime.now().time()
 
     def get_consumption(self, time):
         return {
@@ -37,8 +43,23 @@ class EnergySystem:
     def get_storage(self, time):
         self.update_energy_storage(time)
         return {
-            f"{self.battery.name}": self.battery.get_storage(time),
+            f"{self.battery.name}": self.battery.get_storage(),
         }
 
     def get_status(self):
         return self.battery.status
+
+    def simulate_system(self, start_time: str = "00:00", end_time: str = "23:59"):
+        start_time = self.convert_str_to_time(start_time)
+        end_time = self.convert_str_to_time(end_time)
+        # Should check time formatting here
+        time = start_time
+        hours_simulated = 0
+        while time < end_time and hours_simulated < 24:
+            self.update_energy_storage(time)
+            print(f"Time: {time}")
+            print(f"Battery: {self.battery.get_storage()}")
+            print(f"Status: {self.battery.status}\n")
+            time = time.replace(hour=(time.hour + 1) % 24)
+            hours_simulated += 1
+        return self.get_status()

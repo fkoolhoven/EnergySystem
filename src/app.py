@@ -1,4 +1,3 @@
-import datetime
 
 from flask import Flask, request
 
@@ -9,29 +8,21 @@ app = Flask(__name__)
 system = EnergySystem()
 
 
-def get_time(request):
-    time = request.args.get("time")
-    if time:
-        return datetime.datetime.strptime(time, "%H:%M").time()
-    # Should check for bad request here
-    return datetime.datetime.now().time()
-
-
 @app.get(f"/{API_ROOT}/consumption")
 def consumption():
-    time = get_time(request)
+    time = system.convert_str_to_time(request.args.get("time"))
     return system.get_consumption(time)
 
 
 @app.get(f"/{API_ROOT}/production")
 def production():
-    time = get_time(request)
+    time = system.convert_str_to_time(request.args.get("time"))
     return system.get_production(time)
 
 
 @app.get(f"/{API_ROOT}/storage")
 def storage():
-    time = get_time(request)
+    time = system.convert_str_to_time(request.args.get("time"))
     return system.get_storage(time)
 
 
@@ -41,4 +32,5 @@ def status():
 
 
 if __name__ == "__main__":
+    system.simulate_system()
     app.run()
