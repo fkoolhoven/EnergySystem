@@ -23,3 +23,8 @@ class EnergySystem:
         return {
             f"{self.wind_turbine.name}": self.wind_turbine.get_production(time),
         }
+    
+    def get_total_storage(self, time):
+        return {
+            f"{self.battery.name}": self.battery.get_storage(time),
+        }

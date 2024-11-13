@@ -4,6 +4,7 @@ from src.globals import BATTERY_ALERT_THRESHOLD
 
 @dataclasses.dataclass
 class Battery:
+    name: str = "Battery"
     # max capacity in Wh (1000 W per hour)
     max_capacity: float = 1000.0
     charge_level: float = 1000.0
@@ -26,3 +27,6 @@ class Battery:
             self.charge_level -= energy
             if self.charge_level < BATTERY_ALERT_THRESHOLD:
                 self.alert = "Battery is running low"
+
+    def get_storage(self, time):
+        return self.charge_level
