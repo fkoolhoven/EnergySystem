@@ -1,6 +1,6 @@
 import dataclasses
 
-from consumption.refrigerator import Refrigerator
+from src.system.consumption.refrigerator import Refrigerator
 
 
 @dataclasses.dataclass
@@ -9,6 +9,4 @@ class EnergySystem:
 
     def get_consumption(self):
         # calculate consumption of all devices
-        return {
-            f"{self.refrigerator.name}": self.refrigerator.get_consumption()
-		}
+        return {f"{self.refrigerator.name}": self.refrigerator.get_consumption()}

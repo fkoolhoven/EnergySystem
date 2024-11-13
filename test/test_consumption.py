@@ -1,7 +1,9 @@
+import json
+
 import pytest
 
 from src.app import app
-from src.globals import OK, API_ROOT
+from src.globals import API_ROOT, OK
 from src.system.consumption.refrigerator import Refrigerator
 
 
@@ -15,9 +17,10 @@ def expected_refrigerator_consumption():
     }
 
 
-@pytest.mark.parametrize("time, consumption", expected_refrigerator_consumption.items())
-def test_refrigerator_consumption(time, consumption):
+@pytest.mark.parametrize("time", ["05:15", "12:59", "20:33"])
+def test_refrigerator_consumption(time, expected_refrigerator_consumption):
     client = app.test_client()
-    response = client.get(f"/{API_ROOT}consumption?time={time}")
+    response = client.get(f"/{API_ROOT}/consumption?time={time}")
     assert response.status_code == OK
-    assert response.data["refrigerator"] == consumption
+    data = json.loads(response.data)
+    assert data["Refrigerator"] == expected_refrigerator_consumption[time]
