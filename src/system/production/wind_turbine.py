@@ -1,8 +1,8 @@
 import dataclasses
-import random
 import math
+import random
 
-from src.globals import MIN_WIND_SPEED, MAX_WIND_SPEED, MIN_AIR_DENSITY, MAX_AIR_DENSITY
+from src.globals import MAX_AIR_DENSITY, MAX_WIND_SPEED, MIN_AIR_DENSITY, MIN_WIND_SPEED
 
 
 @dataclasses.dataclass

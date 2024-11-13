@@ -1,5 +1,6 @@
-from flask import Flask, request
 import datetime
+
+from flask import Flask, request
 
 from src.globals import API_ROOT
 from src.system.energy_system import EnergySystem
@@ -26,6 +27,12 @@ def consumption():
 def production():
     time = get_time(request)
     return system.get_total_production(time)
+
+
+@app.get(f"/{API_ROOT}/storage")
+def storage():
+    time = get_time(request)
+    return system.get_total_storage(time)
 
 
 if __name__ == "__main__":

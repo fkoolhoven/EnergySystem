@@ -4,8 +4,8 @@ import pytest
 
 from src.app import app
 from src.globals import API_ROOT, OK
-from src.system.consumption.refrigerator import Refrigerator
 from src.system.consumption.lights import Lights
+from src.system.consumption.refrigerator import Refrigerator
 
 
 @pytest.fixture

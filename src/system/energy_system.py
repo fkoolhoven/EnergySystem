@@ -1,9 +1,9 @@
 import dataclasses
 
-from src.system.consumption.refrigerator import Refrigerator
-from src.system.consumption.lights import Lights
-from src.system.production.wind_turbine import WindTurbine
 from src.system.battery import Battery
+from src.system.consumption.lights import Lights
+from src.system.consumption.refrigerator import Refrigerator
+from src.system.production.wind_turbine import WindTurbine
 
 
 @dataclasses.dataclass
@@ -23,7 +23,7 @@ class EnergySystem:
         return {
             f"{self.wind_turbine.name}": self.wind_turbine.get_production(time),
         }
-    
+
     def get_total_storage(self, time):
         return {
             f"{self.battery.name}": self.battery.get_storage(time),

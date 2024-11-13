@@ -2,6 +2,7 @@ import dataclasses
 
 from src.globals import BATTERY_ALERT_THRESHOLD
 
+
 @dataclasses.dataclass
 class Battery:
     name: str = "Battery"

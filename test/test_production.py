@@ -5,11 +5,11 @@ import pytest
 from src.app import app
 from src.globals import (
     API_ROOT,
-    OK,
-    MIN_WIND_SPEED,
+    MAX_AIR_DENSITY,
     MAX_WIND_SPEED,
     MIN_AIR_DENSITY,
-    MAX_AIR_DENSITY,
+    MIN_WIND_SPEED,
+    OK,
 )
 from src.system.production.wind_turbine import WindTurbine
 
