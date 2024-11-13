@@ -1,4 +1,3 @@
-
 from flask import Flask, request
 
 from src.globals import API_ROOT

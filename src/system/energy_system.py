@@ -47,7 +47,9 @@ class EnergySystem:
         }
 
     def get_status(self):
-        return self.battery.status
+        return {
+            "Status": self.battery.status,
+        }
 
     def simulate_system(self, start_time: str = "00:00", end_time: str = "23:59"):
         start_time = self.convert_str_to_time(start_time)
