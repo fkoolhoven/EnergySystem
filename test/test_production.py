@@ -28,7 +28,7 @@ def expected_wind_turbine_production():
 
 
 @pytest.mark.parametrize("time", ["05:15", "12:59", "20:33"])
-def test_wind_turbine_consumption(time, expected_wind_turbine_production):
+def test_wind_turbine_production(time, expected_wind_turbine_production):
     min_production, max_production = expected_wind_turbine_production
     client = app.test_client()
     response = client.get(f"/{API_ROOT}/production?time={time}")
