@@ -51,17 +51,17 @@ class EnergySystem:
             "Status": self.battery.status,
         }
 
-    def simulate_system(self, start_time: str = "00:00", end_time: str = "23:59"):
-        start_time = self.convert_str_to_time(start_time)
-        end_time = self.convert_str_to_time(end_time)
-        # Should check time formatting here
+    def simulate_system(self, start_time: str = "00:00"):
+        try:
+            start_time = self.convert_str_to_time(start_time)
+        except ValueError:
+            start_time = datetime.datetime.now().time()
         time = start_time
         hours_simulated = 0
-        while time < end_time and hours_simulated < 24:
+        while hours_simulated < 24:
             self.update_energy_storage(time)
             print(f"Time: {time}")
             print(f"Battery: {self.battery.get_storage()}")
             print(f"Status: {self.battery.status}\n")
             time = time.replace(hour=(time.hour + 1) % 24)
             hours_simulated += 1
-        return self.get_status()

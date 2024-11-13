@@ -1,6 +1,6 @@
 from flask import Flask, request
 
-from src.globals import API_ROOT
+from src.globals import API_ROOT, BAD_REQUEST
 from src.system.energy_system import EnergySystem
 
 app = Flask(__name__)
@@ -9,19 +9,28 @@ system = EnergySystem()
 
 @app.get(f"/{API_ROOT}/consumption")
 def consumption():
-    time = system.convert_str_to_time(request.args.get("time"))
+    try:
+        time = system.convert_str_to_time(request.args.get("time"))
+    except ValueError:
+        return "Invalid time format", BAD_REQUEST
     return system.get_consumption(time)
 
 
 @app.get(f"/{API_ROOT}/production")
 def production():
-    time = system.convert_str_to_time(request.args.get("time"))
+    try:
+        time = system.convert_str_to_time(request.args.get("time"))
+    except ValueError:
+        return "Invalid time format", BAD_REQUEST
     return system.get_production(time)
 
 
 @app.get(f"/{API_ROOT}/storage")
 def storage():
-    time = system.convert_str_to_time(request.args.get("time"))
+    try:
+        time = system.convert_str_to_time(request.args.get("time"))
+    except ValueError:
+        return "Invalid time format", BAD_REQUEST
     return system.get_storage(time)
 
 
