@@ -52,19 +52,15 @@ def test_lights_consumption(time, expected_lights_consumption):
 @pytest.fixture
 def expected_heating_consumption():
     heating = Heating()
-    expected_day_consumption = heating.target_temperature - DAY_TEMPERATURE
-    expected_day_consumption = (
-        heating.base_consumption + expected_day_consumption**1.2 * 80
-    )
-    expected_night_consumption = heating.target_temperature - NIGHT_TEMPERATURE
-    expected_night_consumption = (
-        heating.base_consumption + expected_night_consumption**1.2 * 80
-    )
+    day_consumption = heating.target_temperature - DAY_TEMPERATURE
+    day_consumption = heating.base_consumption + day_consumption**1.2 * 80
+    night_consumption = heating.target_temperature - NIGHT_TEMPERATURE
+    night_consumption = heating.base_consumption + night_consumption**1.2 * 80
 
     return {
-        "05:15": expected_night_consumption,
-        "12:59": expected_day_consumption,
-        "20:33": expected_night_consumption,
+        "05:15": night_consumption,
+        "12:59": day_consumption,
+        "20:33": night_consumption,
     }
 
 
