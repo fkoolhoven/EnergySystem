@@ -35,5 +35,10 @@ def storage():
     return system.get_storage(time)
 
 
+@app.get(f"/{API_ROOT}/status")
+def status():
+    return system.get_status()
+
+
 if __name__ == "__main__":
     app.run()

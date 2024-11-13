@@ -39,4 +39,6 @@ class EnergySystem:
         return {
             f"{self.battery.name}": self.battery.get_storage(time),
         }
-    
+
+    def get_status(self):
+        return self.battery.status

@@ -6,10 +6,9 @@ from src.globals import BATTERY_ALERT_THRESHOLD
 @dataclasses.dataclass
 class Battery:
     name: str = "Battery"
-    # max capacity in Wh (1000 W per hour)
-    max_capacity: float = 1000.0
+    max_capacity: float = 1000.0  # in Wh (1000 W per hour)
     charge_level: float = 1000.0
-    alert: str = "Battery is full"
+    status: str = "Battery is full"
 
     def store_energy(self, energy):
         if self.charge_level + energy > self.max_capacity:
